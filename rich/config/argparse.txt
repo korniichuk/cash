@@ -1,0 +1,6 @@
+_parser
+The personal finance utility
+_subparsers
+subcommands
+_parser_init
+init the rich utility
