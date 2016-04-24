@@ -21,20 +21,20 @@ setup(
         "Topic :: Utilities"
     ],
     description="The personal finance utility",
-    download_url="https://github.com/korniichuk/rich/archive/0.1.zip",
-    entry_points={'console_scripts': 'rich=rich.rich:main'},
+    download_url="https://github.com/korniichuk/cash/archive/0.1.zip",
+    entry_points={'console_scripts': 'cash=cash.cash:main'},
     include_package_data=True,
     install_requires=[
         "configobj",
         "matplotlib"
     ],
-    keywords=["finance", "python3", "rich"],
+    keywords=["finance", "python3", "cash"],
     license="Public Domain",
     long_description=open(join(dirname(__file__), "README.rst")).read(),
-    name="rich",
-    packages=["rich"],
+    name="cash",
+    packages=["cash"],
     platforms=["Linux"],
-    url="https://github.com/korniichuk/rich/",
+    url="https://github.com/korniichuk/cash/",
     version="0.1a1",
     zip_safe=True
 )

@@ -22,12 +22,12 @@ def csv2df(config):
         elif quoting == "quote_none":
             quoting = 3
     register_dialect(
-            "rich", delimiter=',', doublequote=True, escapechar=None,
+            "cash", delimiter=',', doublequote=True, escapechar=None,
             quotechar='"', quoting=quoting, skipinitialspace=True,
             strict=False)
     df = read_csv(
             csv_abs_path, squeeze=False, mangle_dupe_cols=False,
             na_filter=True, skip_blank_lines=True, compression="infer",
-            decimal='.', encoding="utf-8", dialect="rich",
+            decimal='.', encoding="utf-8", dialect="cash",
             error_bad_lines=False, warn_bad_lines=True)
     return df

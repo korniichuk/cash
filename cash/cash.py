@@ -7,13 +7,13 @@ from sys import argv, exit
 
 from configobj import ConfigObj
 
-from rich.accessory import create_directory, get_date_time
-from rich.converter import csv2df
-from rich.graph import create_bar_chart
+from cash.accessory import create_directory, get_date_time
+from cash.converter import csv2df
+from cash.graph import create_bar_chart
 
 module_location = dirname(__file__)
-config_rich_abs_path = join(module_location, "config/rich.ini")
-config = ConfigObj(config_rich_abs_path)
+config_cash_abs_path = join(module_location, "config/cash.ini")
+config = ConfigObj(config_cash_abs_path)
 
 argparse = {} # Strings for -h --help
 messages = {} # Strings for output
@@ -92,7 +92,7 @@ def img(args):
     create_bar_chart(labels, heights, config=config)
 
 def init(args):
-    """Init the rich utility"""
+    """Init the cash utility"""
 
     def init_csv(csv_abs_path):
         """Init CSV file"""
@@ -144,10 +144,10 @@ def parse_command_line_args():
     """Parse command line arguments"""
 
     # Create top parser
-    parser = ArgumentParser(prog="rich", description=argparse["_parser"],
+    parser = ArgumentParser(prog="cash", description=argparse["_parser"],
                             add_help=True)
     parser.add_argument("-v", "--version", action="version",
-                        version="rich 0.1a1")
+                        version="cash 0.1a1")
     # Create subparsers for the top parser
     subparsers = parser.add_subparsers(title=argparse["_subparsers"])
     # Create the parser for the "img" subcommand

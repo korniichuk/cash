@@ -3,38 +3,38 @@
 
 Installation
 ============
-Install the rich from PyPI
+Install the cash from PyPI
 --------------------------
 ::
 
-    $ sudo pip3 install rich
+    $ sudo pip3 install cash
 
-Install the rich from GitHub
+Install the cash from GitHub
 ----------------------------
 ::
 
-    $ sudo pip3 install git+git://github.com/korniichuk/rich#egg=rich
+    $ sudo pip3 install git+git://github.com/korniichuk/cash#egg=cash
 
-Upgrade the rich from PyPI
+Upgrade the cash from PyPI
 --------------------------
 ::
 
-    $ sudo pip3 install -U rich
+    $ sudo pip3 install -U cash
 
 or::
 
-    $ sudo pip3 install --upgrade rich
+    $ sudo pip3 install --upgrade cash
 
-Uninstall the rich
+Uninstall the cash
 ------------------
 ::
 
-    $ sudo pip3 uninstall rich
+    $ sudo pip3 uninstall cash
 
 Development installation
 ========================
 ::
 
-    $ git clone git://github.com/korniichuk/rich.git
-    $ cd rich
+    $ git clone git://github.com/korniichuk/cash.git
+    $ cd cash
     $ sudo pip3 install .

@@ -5,4 +5,4 @@ subcommands
 _parser_img
 create bar chart img
 _parser_init
-init the rich utility
+init the cash utility

@@ -38,5 +38,5 @@ def create_bar_chart(k, v, width=0.5, grid=True, config=None):
         bar_chart_png_file_name = config["bar_chart_png_file_name"]
         png_abs_path = join(output_dir_abs_path, bar_chart_png_file_name)
     else:
-        png_abs_path = "rich.png"
+        png_abs_path = "cash.png"
     plt.savefig(png_abs_path)

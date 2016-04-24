@@ -9,7 +9,7 @@ def git():
     """Setup Git"""
 
     local("git remote rm origin")
-    local("git remote add origin https://korniichuk@github.com/korniichuk/rich.git")
+    local("git remote add origin https://korniichuk@github.com/korniichuk/cash.git")
 
 def live():
     """Upload package to PyPI Live"""
