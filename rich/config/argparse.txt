@@ -2,5 +2,7 @@ _parser
 The personal finance utility
 _subparsers
 subcommands
+_parser_img
+create bar chart img
 _parser_init
 init the rich utility
