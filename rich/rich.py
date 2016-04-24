@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
 
 from argparse import ArgumentParser
-from os.path import dirname, join
+from os import remove
+from os.path import dirname, exists, expanduser, isdir, isfile, join
 from sys import argv, exit
 
 from configobj import ConfigObj
+
+from rich.accessory import create_directory, get_date_time
 
 module_location = dirname(__file__)
 config_rich_abs_path = join(module_location, "config/rich.ini")
@@ -33,7 +36,42 @@ def create_dictionaries():
 def init(args):
     """Init the rich utility"""
 
-    pass
+    def init_csv(csv_abs_path):
+        """Init CSV file"""
+
+        date = get_date_time()[:10]
+        empty_data = "\"%s\",0.00,1\n" % date
+        with open(csv_abs_path, 'w') as f:
+            f.write(empty_data)
+
+    csv_abs_path = expanduser(config["csv_abs_path"])
+    dir_abs_path = dirname(csv_abs_path)
+    if exists(csv_abs_path) and isfile(csv_abs_path):
+        print(messages["_delete_json"] % csv_abs_path)
+        try:
+            answer = raw_input()
+        except NameError:
+            answer = input()
+        answer_lower = answer.lower()
+        if ((answer_lower == 'y') or (answer_lower == 'yes') or
+            (answer_lower == 'yep')):
+            if exists(dir_abs_path) and isdir(dir_abs_path):
+                pass
+            elif exists(dir_abs_path) and isfile(dir_abs_path):
+                remove(dir_abs_path)
+                create_directory(dir_abs_path, messages=messages)
+            else:
+                create_directory(dir_abs_path, messages=messages)
+            init_csv(csv_abs_path)
+    else:
+        if exists(dir_abs_path) and isdir(dir_abs_path):
+            pass
+        elif exists(dir_abs_path) and isfile(dir_abs_path):
+            remove(dir_abs_path)
+            create_directory(dir_abs_path, messages=messages)
+        else:
+            create_directory(dir_abs_path, messages=messages)
+        init_csv(csv_abs_path)
 
 def main():
     """Main function"""
