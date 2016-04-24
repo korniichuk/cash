@@ -8,6 +8,7 @@ from sys import argv, exit
 from configobj import ConfigObj
 
 from rich.accessory import create_directory, get_date_time
+from rich.converter import csv2df
 
 module_location = dirname(__file__)
 config_rich_abs_path = join(module_location, "config/rich.ini")
@@ -32,6 +33,10 @@ def create_dictionaries():
         messages_list = f.read().splitlines()
     for i in range(0, len(messages_list), 2):
         messages[messages_list[i]] = messages_list[i+1]
+
+def img(args):
+
+    pass
 
 def init(args):
     """Init the rich utility"""
@@ -90,11 +95,16 @@ def parse_command_line_args():
                         version="rich 0.1a1")
     # Create subparsers for the top parser
     subparsers = parser.add_subparsers(title=argparse["_subparsers"])
+    # Create the parser for the "img" subcommand
+    parser_img = subparsers.add_parser(
+            "img", description=argparse["_parser_img"],
+            help=argparse["_parser_img"])
+    parser_img.set_defaults(function_name=img)
     # Create the parser for the "init" subcommand
-    parser_install = subparsers.add_parser("init",
-            description=argparse["_parser_init"],
+    parser_init = subparsers.add_parser(
+            "init", description=argparse["_parser_init"],
             help=argparse["_parser_init"])
-    parser_install.set_defaults(function_name=init)
+    parser_init.set_defaults(function_name=init)
     if len(argv) == 1:
         parser.print_help()
         exit(0) # Clean exit without any errors/problems
