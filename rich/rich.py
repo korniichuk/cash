@@ -9,6 +9,7 @@ from configobj import ConfigObj
 
 from rich.accessory import create_directory, get_date_time
 from rich.converter import csv2df
+from rich.graph import create_bar_chart
 
 module_location = dirname(__file__)
 config_rich_abs_path = join(module_location, "config/rich.ini")
@@ -35,8 +36,60 @@ def create_dictionaries():
         messages[messages_list[i]] = messages_list[i+1]
 
 def img(args):
+    """Create bar chart img"""
 
-    pass
+    def check_labels(labels):
+        """Check 'labels' var"""
+
+        years = []
+
+        label_min = min(labels)
+        label_max = max(labels)
+        for label in labels:
+            year = label[:4]
+            if year not in years:
+                years.append(year)
+        for year in years:
+            for i in range(1,13):
+                month = str(i)
+                if len(month) == 1:
+                    month = '0' + month
+                label = year + month
+                if ((label > label_min) and (label < label_max) and
+                        (label not in labels)):
+                    labels.append(label)
+        labels.sort()
+        return labels
+
+    data={}
+
+    # Read CSV file into DataFrame
+    df = csv2df(config)
+    # Sort by the values along either axis
+    df.sort_values(by="date", axis=0, ascending=True, inplace=True,
+                   na_position='last')
+    # Get data to 'data' dict var
+    for index, date in enumerate(df["date"]):
+        label = date[:7].replace('-',"")
+        if label not in data:
+            data[label] = df["amount"][index] / df["exchange_rate"][index]
+        else:
+            data[label] += (df["amount"][index] / df["exchange_rate"][index])
+    # Get labels to 'labels' list var
+    labels = list(data.keys())
+    labels = check_labels(labels)
+    # Get heights to 'heights' list var
+    heights = []
+    for label in labels:
+        if label in data:
+            heights.append(data[label])
+        else:
+            heights.append(0.00)
+    # Improve labels look
+    for index, label in enumerate(labels):
+        labels[index] = label[4:] + "\n" + label[:4]
+    # Create bar chart img
+    create_bar_chart(labels, heights, config=config)
 
 def init(args):
     """Init the rich utility"""
@@ -45,14 +98,16 @@ def init(args):
         """Init CSV file"""
 
         date = get_date_time()[:10]
+        header = "\"date\",\"amount\",\"exchange_rate\"\n"
         empty_data = "\"%s\",0.00,1\n" % date
         with open(csv_abs_path, 'w') as f:
+            f.write(header)
             f.write(empty_data)
 
     csv_abs_path = expanduser(config["csv_abs_path"])
     dir_abs_path = dirname(csv_abs_path)
     if exists(csv_abs_path) and isfile(csv_abs_path):
-        print(messages["_delete_json"] % csv_abs_path)
+        print(messages["_delete_csv"] % csv_abs_path)
         try:
             answer = raw_input()
         except NameError:
