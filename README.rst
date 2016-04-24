@@ -38,3 +38,37 @@ Development installation
     $ git clone git://github.com/korniichuk/cash.git
     $ cd cash
     $ sudo pip3 install .
+
+User guide
+==========
+Help
+----
+The standard output for –help::
+
+    $ cash -h
+
+or::
+
+    $ cash --help
+
+For information on using subcommand "SUBCOMMAND", do::
+
+    $ cash SUBCOMMAND -h
+
+or::
+
+    $ cash SUBCOMMAND --help
+
+Example::
+
+    $ cash init -h
+
+Version
+-------
+The standard output for –version::
+
+    $ cash -v
+
+or::
+
+    $ cash --version
